@@ -1,0 +1,16 @@
+@(message: String)
+
+@main("Welcome to Play") {
+
+        <script src='@routes.Assets.at("js/courses.js")' type='text/javascript'></script>
+
+
+        <ul id="courses"></ul>
+
+        <form action="@routes.Admin.addCourse()" method="post">
+            <input name="course_id" type = "hidden" value="0"/>
+            <input name="name">
+            <button>Add Course</button>
+        </form>
+
+}

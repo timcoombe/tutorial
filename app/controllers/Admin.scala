@@ -1,5 +1,6 @@
 package controllers
 
+import controllers.Application._
 import models.Course
 import play.api._
 import play.api.data.Form
@@ -14,10 +15,16 @@ import play.api.Play.current
 object Admin extends Controller{
 
 
+  def index = Action {
+    Ok(views.html.admin("Your new application is ready."))
+  }
+
+
   val courseForm : Form[Course] = Form {
     mapping(
+      "course_id" -> longNumber,
       "name" -> text
-    )(Course.my_apply)(Course.my_unapply)
+    )(Course.apply)(Course.unapply)
   }
 
 
