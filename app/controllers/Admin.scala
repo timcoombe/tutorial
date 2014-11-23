@@ -25,7 +25,7 @@ object Admin extends Controller{
 
     DB.withConnection { implicit c =>
       val course = courseForm.bindFromRequest.get
-      SQL("insert into Person(name) values ({name})")
+      SQL("insert into Course(name) values ({name})")
         .on("name" -> course.name).executeInsert()
     }
 
