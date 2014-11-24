@@ -37,7 +37,7 @@ object Admin extends Controller{
         .on("name" -> course.name).executeInsert()
     }
 
-    Redirect(routes.Application.index())
+    Redirect(routes.Admin.index())
 
   }
 
