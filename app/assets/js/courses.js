@@ -1,10 +1,10 @@
 $(function() {
     $.ajax({
-      url: "/admin/courses",
+      url: "/admin/api/courses",
       success: function( data ) {
 
         $.each(data, function(index,item) {
-            $("#courses").append("<li>" + item.name + "</li>");
+            $("#courses").append("<tr><td>" + item.course_id + "</td><td>" + item.name + "</td></tr>");
         });
 
 

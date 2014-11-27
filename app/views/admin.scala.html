@@ -5,9 +5,9 @@
         <script src='@routes.Assets.at("js/courses.js")' type='text/javascript'></script>
 
 
-        <ul id="courses"></ul>
+        <table id="courses"></table>
 
-        <form action="@routes.Admin.addCourse()" method="post">
+        <form action="@routes.CourseController.addCourse()" method="post">
             <input name="course_id" type = "hidden" value="0"/>
             <input name="name">
             <button>Add Course</button>

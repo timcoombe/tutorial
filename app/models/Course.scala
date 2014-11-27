@@ -1,6 +1,9 @@
 package models
 
 import play.api.libs.json.Json
+import play.api.db.DB
+import anorm._
+import play.api.Play.current
 
 case class Course(course_id:Long,name: String){
   def this(name: String) = this(0,name)
@@ -14,5 +17,31 @@ object Course{
  /* def my_apply(name: String) = new Course(name)
   def my_unapply(course: Course) = Some(course.name)
 */
+
+
+  def addCourse(name: String) = {
+
+    DB.withConnection { implicit c =>
+
+      SQL("insert into Course(name) values ({name})")
+        .on("name" -> name).executeInsert()
+    }
+  }
+
+
+  def getCourses = {
+
+    DB.withConnection { implicit c =>
+
+      val selectCourses = SQL("select * from Course")
+
+      selectCourses().map {row =>
+        Course(row[Long]("course_id"),row[String]("name"))
+      }.toList
+
+    }
+  }
+
+
 }
 
