@@ -43,5 +43,18 @@ object Course{
   }
 
 
+  def deleteCourse(id: Long){
+
+     DB.withConnection { implicit connection =>
+      SQL("""
+          DELETE FROM Course where course_id = {id}
+          """).on(
+          'id -> id
+        ).executeUpdate
+    }
+
+  }
+
+
 }
 

@@ -9,6 +9,7 @@ import play.api.mvc._
 object CourseController extends Controller{
 
 
+
   val courseForm : Form[Course] = Form {
     mapping(
       "course_id" -> longNumber,
@@ -31,5 +32,19 @@ object CourseController extends Controller{
     Ok(Json.toJson(courses))
   }
 
+
+  def deleteCourse(id: Long) = Action {
+
+    Course.deleteCourse(id)
+    Ok("success")
+
+  }
+
+
+  def course(id: Long) = Action {
+
+    Ok(views.html.course(id))
+
+  }
 
 }
