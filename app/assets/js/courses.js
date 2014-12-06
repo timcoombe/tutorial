@@ -4,7 +4,7 @@ $(function() {
       success: function( data ) {
 
         $.each(data, function(index,item) {
-            $("#courses").append("<li>" + item.name + "</li>");
+            $("#courses").append("<tr><td>" + item.name + "</td></tr>");
         });
 
 
