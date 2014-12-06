@@ -8,11 +8,16 @@ GET     /                           controllers.Application.index
 
 
 GET     /admin                      controllers.Admin.index
+GET     /admin/course/:id           controllers.CourseController.course(id: Long)
 
-POST    /admin/course               controllers.Admin.addCourse
-GET     /admin/courses              controllers.Admin.courses
+
+POST    /admin/api/course               controllers.CourseController.addCourse
+GET     /admin/api/courses              controllers.CourseController.courses
+
+DELETE  /admin/api/course/:id       controllers.CourseController.deleteCourse(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
 
 
