@@ -11,6 +11,7 @@ case class Course(course_id:Long,name: String){
 
 object Course{
 
+
   implicit val courseFormat = Json.format[Course]
 
   //JSON parser doesn't like multiple apply/unapply methods
@@ -28,6 +29,12 @@ object Course{
     }
   }
 
+  def updateCourse(course: Course) = {
+
+
+
+
+  }
 
   def getCourses = {
 
@@ -42,6 +49,20 @@ object Course{
     }
   }
 
+  def getCourse(id: Long) = {
+
+    DB.withConnection { implicit c =>
+
+      val selectCourse = SQL("select * from Course where course_id = {id}").on(
+        'id -> id
+      )
+
+      selectCourse().map {row =>
+        Course(row[Long]("course_id"),row[String]("name"))
+      }.toList(0)
+    }
+
+  }
 
   def deleteCourse(id: Long){
 
@@ -54,6 +75,7 @@ object Course{
     }
 
   }
+
 
 
 }
