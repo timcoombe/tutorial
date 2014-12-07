@@ -7,10 +7,8 @@ $(function() {
           url: "/admin/api/course/" + courseId,
           success: function( data ) {
 
-            $.each(data, function(index,item) {
-                $("#courses").append("<tr><td><a href='/admin/course/" + item.course_id + "'>" + item.name + "</a></td><td><a class='delete_course' data-id='" + item.course_id + "' href='#'>del</a></td></tr>");
-            });
-
+               $('#course_id').val(data.courseId);
+               $('#name').val(data.name);
           }
         });
 
