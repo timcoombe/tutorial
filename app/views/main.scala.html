@@ -13,10 +13,16 @@
 
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
-        <script src='@routes.Assets.at("javascripts/jquery-1.11.1.min.js")' type='text/javascript'></script>
+        <script src="@routes.Assets.at("javascripts/jquery-1.11.1.min.js")" type="text/javascript"></script>
 
     </head>
     <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Bootstrap grid examples</h1>
+                <p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
+            </div>
         @content
+        </div>
     </body>
 </html>

@@ -1,0 +1,19 @@
+@(message: String)
+
+@admin("Welcome to Play") {
+
+        <script src='@routes.Assets.at("js/courses.js")' type='text/javascript'></script>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Courses</div>
+            <table id="courses" class="table"></table>
+
+        </div>
+        <form action="@routes.CourseController.addCourse()" method="post">
+            <input name="course_id" type = "hidden" value="0"/>
+            <input name="name">
+            <button>Add Course</button>
+        </form>
+
+}

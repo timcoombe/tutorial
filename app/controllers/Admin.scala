@@ -16,9 +16,7 @@ object Admin extends Controller{
 
 
   def index = Action {
-    Ok(views.html.admin("Your new application is ready."))
+    Ok(views.html.admincourses("Your new application is ready."))
   }
-
-
 
 }

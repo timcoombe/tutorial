@@ -53,7 +53,7 @@ object CourseController extends Controller{
 
   def course(id: Long) = Action {
 
-    Ok(views.html.course(id))
+    Ok(views.html.admincourse(id))
 
   }
 

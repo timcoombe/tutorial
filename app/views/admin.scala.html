@@ -1,19 +1,28 @@
-@(message: String)
+@(title: String)(content: Html)
 
-@main("Welcome to Play") {
+<!DOCTYPE html>
 
-        <script src='@routes.Assets.at("js/courses.js")' type='text/javascript'></script>
+<html>
+    <head>
+        <title>@title</title>
 
-        <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Courses</div>
-            <table id="courses" class="table"></table>
 
+        <link  rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/css/bootstrap.css")">
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/jquery-1.11.1.min.js")" type="text/javascript"></script>
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Bootstrap grid examples</h1>
+                <p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
+            </div>
+        @content
         </div>
-        <form action="@routes.CourseController.addCourse()" method="post">
-            <input name="course_id" type = "hidden" value="0"/>
-            <input name="name">
-            <button>Add Course</button>
-        </form>
-
-}
+    </body>
+</html>
