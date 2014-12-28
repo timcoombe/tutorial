@@ -27,9 +27,14 @@ object CourseController extends Controller{
 
   }
 
-  def updateCourse = Action {implicit request =>
+  def updateCourse(id: Long) = Action {implicit request =>
+
+
+    println("updating")
 
     val course = courseForm.bindFromRequest.get
+
+    println(course.name)
     Course.updateCourse(course)
 
     Redirect(routes.Admin.index())
@@ -53,6 +58,8 @@ object CourseController extends Controller{
 
 
   def course(id: Long) = Action {
+
+    println("blah blah")
 
     Ok(views.html.admincourse(id))
 

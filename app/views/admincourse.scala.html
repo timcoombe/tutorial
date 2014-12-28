@@ -11,11 +11,18 @@
 
         <table id="course"></table>
 
-       <form action="@routes.CourseController.updateCourse()" method="update">
-            <input id="course_id" name="course_id" type = "hidden" value=""/>
-           <input id="name" name="name">
-           <textarea id="description" name="description"></textarea>
-           <button>Update Course</button>
+        <form role="form" method="post">
+            <input name="course_id" id="course_id" type = "hidden" value=""/>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" class="form-control" id="description" name="description">
+            </div>
+            <button class="update" type="submit" class="btn btn-default">Update Course</button>
         </form>
+
 
 }

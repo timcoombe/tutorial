@@ -31,7 +31,11 @@ object Course{
 
   def updateCourse(course: Course) = {
 
+    DB.withConnection { implicit c =>
 
+      SQL("update Course set name = {name}, description = {description} where course_id = {id}")
+        .on("name" -> course.name, "description" -> course.description, "id" -> course.course_id).executeUpdate()
+    }
 
 
   }

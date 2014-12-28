@@ -13,7 +13,7 @@ GET     /admin/course/:id           controllers.CourseController.course(id: Long
 
 POST    /admin/api/course               controllers.CourseController.addCourse
 GET    /admin/api/course/:id               controllers.CourseController.getCourse(id: Long)
-PUT    /admin/api/course               controllers.CourseController.updateCourse
+PUT    /admin/api/course/:id               controllers.CourseController.updateCourse(id: Long)
 
 GET     /admin/api/courses              controllers.CourseController.courses
 

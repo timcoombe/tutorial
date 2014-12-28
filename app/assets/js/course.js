@@ -7,7 +7,7 @@ $(function() {
           url: "/admin/api/course/" + courseId,
           success: function( data ) {
 
-               $('#course_id').val(data.courseId);
+               $('#course_id').val(data.course_id);
                $('#name').val(data.name);
                $('#description').val(data.description);
           }
@@ -15,20 +15,27 @@ $(function() {
 
     }
 
-/*
-    $('body').on('click', '.delete_course', function() {
+   $('body').on('click', '.update', function() {
 
-       $.ajax({
-             type: "DELETE",
-             url: "/admin/api/course/" + $(this).data("id"),
-             success: function( data ) {
+      var fd = new FormData();
+      fd.append( 'course_id', $('#course_id').val());
+      fd.append( 'name', $('#name').val());
+      fd.append( 'description', $('#description').val());
 
-                loadCourses();
+      $.ajax({
+        url: '/admin/api/course/' + $('#course_id').val(),
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'PUT',
+        success: function(data){
+          //alert(data);
+        }
+      });
 
-             }
-           });
+      return false;
 
-    });*/
+    });
 
     loadCourse();
 
