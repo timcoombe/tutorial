@@ -13,14 +13,15 @@ object CourseController extends Controller{
   val courseForm : Form[Course] = Form {
     mapping(
       "course_id" -> longNumber,
-      "name" -> text
+      "name" -> text,
+      "description" -> text
     )(Course.apply)(Course.unapply)
   }
 
   def addCourse = Action {implicit request =>
 
     val course = courseForm.bindFromRequest.get
-    Course.addCourse(course.name)
+    Course.addCourse(course.name, course.description)
 
     Redirect(routes.Admin.index())
 

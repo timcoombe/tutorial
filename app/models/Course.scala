@@ -5,8 +5,8 @@ import play.api.db.DB
 import anorm._
 import play.api.Play.current
 
-case class Course(course_id:Long,name: String){
-  def this(name: String) = this(0,name)
+case class Course(course_id:Long,name: String, description: String){
+  def this(name: String,description: String) = this(0,name,description)
 }
 
 object Course{
@@ -20,12 +20,12 @@ object Course{
 */
 
 
-  def addCourse(name: String) = {
+  def addCourse(name: String, description: String) = {
 
     DB.withConnection { implicit c =>
 
-      SQL("insert into Course(name) values ({name})")
-        .on("name" -> name).executeInsert()
+      SQL("insert into Course(name, description) values ({name},{description})")
+        .on("name" -> name, "description" -> description).executeInsert()
     }
   }
 
@@ -43,7 +43,7 @@ object Course{
       val selectCourses = SQL("select * from Course")
 
       selectCourses().map {row =>
-        Course(row[Long]("course_id"),row[String]("name"))
+        Course(row[Long]("course_id"),row[String]("name"),row[String]("description"))
       }.toList
 
     }
@@ -58,7 +58,7 @@ object Course{
       )
 
       selectCourse().map {row =>
-        Course(row[Long]("course_id"),row[String]("name"))
+        Course(row[Long]("course_id"),row[String]("name"),row[String]("description"))
       }.toList(0)
     }
 

@@ -9,6 +9,7 @@ $(function() {
 
                $('#course_id').val(data.courseId);
                $('#name').val(data.name);
+               $('#description').val(data.description);
           }
         });
 
