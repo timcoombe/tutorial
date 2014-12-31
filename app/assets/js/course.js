@@ -10,8 +10,21 @@ $(function() {
                $('#course_id').val(data.course_id);
                $('#name').val(data.name);
                $('#description').val(data.description);
+               $("#lesson_course_id").val(data.course_id);
           }
         });
+
+
+
+      $.ajax({
+          url: "/admin/api/course/" + courseId + "/lessons",
+          success: function( data ) {
+            $.each(data, function(index,item) {
+                $("#lessons").append("<tr><td><a href='/admin/lesson/" + item.lesson_id + "'>" + item.name + "</a></td><td><a class='delete_lesson' data-id='" + item.lesson_id + "' href='#'>del</a></td></tr>");
+            });          }
+        });
+
+
 
     }
 

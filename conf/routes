@@ -14,6 +14,8 @@ GET     /admin/course/:id           controllers.CourseController.course(id: Long
 POST    /admin/api/course               controllers.CourseController.addCourse
 GET    /admin/api/course/:id               controllers.CourseController.getCourse(id: Long)
 PUT    /admin/api/course/:id               controllers.CourseController.updateCourse(id: Long)
+GET    /admin/api/course/:course_id/lessons       controllers.LessonController.getLessons(course_id: Long)
+POST    /admin/api/lesson               controllers.LessonController.addLesson
 
 GET     /admin/api/courses              controllers.CourseController.courses
 

@@ -7,6 +7,7 @@ import play.api.Play.current
 
 case class Course(course_id:Long,name: String, description: String){
   def this(name: String,description: String) = this(0,name,description)
+
 }
 
 object Course{
