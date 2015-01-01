@@ -35,4 +35,11 @@ object LessonController extends Controller{
     Ok(Json.toJson(lessons))
   }
 
+  def deleteLesson(id: Long) = Action {
+
+    Lesson.deleteLesson(id)
+    Ok("success")
+
+  }
+
 }

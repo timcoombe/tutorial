@@ -2,6 +2,7 @@ $(function() {
 
     function loadCourse() {
 
+        $("#lessons tr").remove();
 
         $.ajax({
           url: "/admin/api/course/" + courseId,
@@ -49,6 +50,21 @@ $(function() {
       return false;
 
     });
+
+
+      $('body').on('click', '.delete_lesson', function() {
+
+           $.ajax({
+                 type: "DELETE",
+                 url: "/admin/api/lesson/" + $(this).data("id"),
+                 success: function( data ) {
+
+                    loadCourse();
+
+                 }
+               });
+
+        });
 
     loadCourse();
 

@@ -39,4 +39,16 @@ object Lesson {
 
   }
 
+  def deleteLesson(id: Long){
+
+    DB.withConnection { implicit connection =>
+      SQL("""
+          DELETE FROM Lesson where lesson_id = {id}
+          """).on(
+          'id -> id
+        ).executeUpdate
+    }
+
+  }
+
 }
