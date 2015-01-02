@@ -42,4 +42,30 @@ object LessonController extends Controller{
 
   }
 
+
+  def lesson(id: Long) = Action {
+
+    Ok(views.html.adminlesson(id))
+
+  }
+
+
+  def getLesson(id: Long) = Action {
+
+    val lesson = Lesson.getLesson(id)
+    Ok(Json.toJson(lesson))
+
+  }
+
+  def updateLesson(id: Long) = Action {implicit request =>
+
+
+    val lesson = lessonForm.bindFromRequest.get
+
+    Lesson.updateLesson(lesson)
+
+    Redirect(routes.Admin.index())
+
+  }
+
 }

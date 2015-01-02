@@ -10,6 +10,7 @@ GET     /                           controllers.Application.index
 GET     /admin                      controllers.Admin.index
 GET     /admin/                      controllers.Admin.index
 GET     /admin/course/:id           controllers.CourseController.course(id: Long)
+GET     /admin/lesson/:id           controllers.LessonController.lesson(id: Long)
 
 
 # Api controllers
@@ -22,7 +23,9 @@ DELETE  /admin/api/course/:id           controllers.CourseController.deleteCours
 
 POST    /admin/api/lesson                         controllers.LessonController.addLesson
 GET    /admin/api/course/:course_id/lessons       controllers.LessonController.getLessons(course_id: Long)
+GET    /admin/api/lesson/:id                       controllers.LessonController.getLesson(id: Long)
 DELETE  /admin/api/lesson/:id                     controllers.LessonController.deleteLesson(id: Long)
+PUT    /admin/api/lesson/:id                      controllers.LessonController.updateLesson(id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path
