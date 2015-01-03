@@ -1,9 +1,13 @@
 package models
 
 import anorm._
+import org.json4s.ShortTypeHints
+import org.json4s.native.Serialization
 import play.api.db.DB
 import play.api.libs.json.Json
 import play.api.Play.current
+
+import scala.collection.mutable
 
 case class Lesson(lesson_id: Long,course_id:Long,name:String,description:String) {
 
@@ -12,9 +16,7 @@ case class Lesson(lesson_id: Long,course_id:Long,name:String,description:String)
 }
 object Lesson {
 
-
   implicit val lessonFormat = Json.format[Lesson]
-
 
   def addLesson(courseId: Long, name: String, description: String) = {
 
@@ -77,4 +79,15 @@ object Lesson {
 
 
   }
+
+  def getLessonParts(id: Long) : mutable.MutableList[LessonPart] = {
+
+    val parts =  new mutable.MutableList[LessonPart]()
+
+    parts += new LessonPartParagraph("This is the headline", "Do this lesson and you will be the master!!!")
+
+    parts
+
+  }
+
 }

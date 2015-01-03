@@ -15,3 +15,4 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += "org.postgresql" % "postgresql" % "9.3-1100-jdbc41"
 
+libraryDependencies +=  "org.json4s" %% "json4s-native" % "3.2.11"
