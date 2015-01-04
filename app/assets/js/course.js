@@ -22,7 +22,8 @@ $(function() {
           success: function( data ) {
             $.each(data, function(index,item) {
                 $("#lessons").append("<tr><td><a href='/admin/lesson/" + item.lesson_id + "'>" + item.name + "</a></td><td><a class='delete_lesson' data-id='" + item.lesson_id + "' href='#'>del</a></td></tr>");
-            });          }
+            });
+          }
         });
 
 

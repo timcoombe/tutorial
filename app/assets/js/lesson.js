@@ -1,5 +1,11 @@
 $(function() {
 
+    function addLessonParagraph(lessonPart){
+        $("#lessons-parts").append("<tr><td>Paragraph</td></tr>");
+         $("#lessons-parts").append("<tr><td>" + lessonPart.headline + "</td></tr>");
+          $("#lessons-parts").append("<tr><td>" + lessonPart.text + "</td></tr>");
+      }
+
     function loadLesson() {
 
 
@@ -15,6 +21,34 @@ $(function() {
         });
 
     }
+
+   function loadLessonParts() {
+        $.ajax({
+           url: "/admin/api/lesson/" + lessonId + "/parts",
+           success: function( data ) {
+
+             $.each(data, function(index,item) {
+
+                switch(item.jsonClass){
+                    case "LessonPartParagraph":
+                        addLessonParagraph(item);
+                        break;
+                    default:
+                        alert("Type not recognised");
+                }
+
+
+
+              //  $("#lesson-p").append("<tr><td><a href='/admin/course/" + item.course_id + "'>" + item.name + "</a></td><td><a class='delete_course' data-id='" + item.course_id + "' href='#'>del</a></td></tr>");
+             });
+
+            }
+        });
+
+    }
+
+
+
 
    $('body').on('click', '.update', function() {
 
@@ -41,5 +75,6 @@ $(function() {
 
 
     loadLesson();
+    loadLessonParts();
 
 });

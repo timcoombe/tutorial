@@ -70,7 +70,7 @@ object LessonController extends Controller{
 
     val lessonParts = Lesson.getLessonParts(id).toList
 
-    Ok(write(lessonParts))
+    Ok(write(lessonParts)).as("application/json")
 
   }
 
