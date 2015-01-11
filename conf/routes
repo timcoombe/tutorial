@@ -11,7 +11,9 @@ GET     /admin                      controllers.Admin.index
 GET     /admin/                      controllers.Admin.index
 GET     /admin/course/:id           controllers.CourseController.course(id: Long)
 GET     /admin/lesson/:id           controllers.LessonController.lesson(id: Long)
+GET     /admin/lessonpart/:id       controllers.LessonController.lessonPart(id: Long)
 
+GET     /admin/lesson/:id/new/:type controllers.LessonController.newLessonPart(id: Long, type: String)
 
 # Api controllers
 

@@ -1,9 +1,21 @@
 $(function() {
 
     function addLessonParagraph(lessonPart){
-        $("#lessons-parts").append("<tr><td>Paragraph</td></tr>");
-         $("#lessons-parts").append("<tr><td>" + lessonPart.headline + "</td></tr>");
-          $("#lessons-parts").append("<tr><td>" + lessonPart.text + "</td></tr>");
+
+        var paragraphHTML = "<tr><td>";
+
+        paragraphHTML = paragraphHTML +  "<table class='table lesson-part'>";
+
+        paragraphHTML = paragraphHTML + "<tr><td><a href='/admin/lessonpart/" + lessonPart.lesson_part_id + "'>edit</a></td></tr>";
+        paragraphHTML = paragraphHTML + "<tr><td>" + lessonPart.headline + "</td></tr>";
+        paragraphHTML = paragraphHTML +  "<tr><td>" + lessonPart.text + "</td></tr>";
+
+        paragraphHTML = paragraphHTML +  "</table>";
+        paragraphHTML = paragraphHTML +  "</td></tr>";
+
+
+        $("#lessons-parts").append(paragraphHTML);
+
       }
 
     function loadLesson() {

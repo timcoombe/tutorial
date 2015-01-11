@@ -1,0 +1,8 @@
+.lesson-part {
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.lesson-part-buttons {
+    padding: 8px 0 0 8px;
+}

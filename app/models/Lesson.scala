@@ -84,7 +84,7 @@ object Lesson {
 
     val parts =  new mutable.MutableList[LessonPart]()
 
-    parts += new LessonPartParagraph("This is the headline", "Do this lesson and you will be the master!!!")
+    parts += new LessonPartParagraph(1, 1,"This is the headline", "Do this lesson and you will be the master!!!")
 
     parts
 

@@ -85,4 +85,20 @@ object LessonController extends Controller{
 
   }
 
+
+  def lessonPart(id: Long) = Action {
+
+    Ok(views.html.adminlesson(id))
+
+  }
+
+  def newLessonPart(id: Long, partType: String) = Action {
+
+    partType match{
+      case "paragraph" => Ok(views.html.adminlessonparagraph(id))
+      case _ => NotFound
+    }
+
+  }
+
 }
