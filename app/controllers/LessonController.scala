@@ -66,13 +66,6 @@ object LessonController extends Controller{
     Ok(Json.toJson(lesson))
 
   }
-  def getLessonParts(id: Long) = Action {
-
-    val lessonParts = Lesson.getLessonParts(id).toList
-
-    Ok(write(lessonParts)).as("application/json")
-
-  }
 
   def updateLesson(id: Long) = Action {implicit request =>
 
@@ -82,22 +75,6 @@ object LessonController extends Controller{
     Lesson.updateLesson(lesson)
 
     Redirect(routes.Admin.index())
-
-  }
-
-
-  def lessonPart(id: Long) = Action {
-
-    Ok(views.html.adminlesson(id))
-
-  }
-
-  def newLessonPart(id: Long, partType: String) = Action {
-
-    partType match{
-      case "paragraph" => Ok(views.html.adminlessonparagraph(id))
-      case _ => NotFound
-    }
 
   }
 

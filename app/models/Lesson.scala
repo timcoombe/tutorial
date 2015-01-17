@@ -6,6 +6,11 @@ import org.json4s.native.Serialization
 import play.api.db.DB
 import play.api.libs.json.Json
 import play.api.Play.current
+import org.json4s._
+import org.json4s.native.JsonMethods._
+import org.json4s.JsonDSL._
+import org.json4s.native.Serialization
+import org.json4s.native.Serialization.{read, write}
 
 import scala.collection.mutable
 
@@ -17,6 +22,7 @@ case class Lesson(lesson_id: Long,course_id:Long,name:String,description:String)
 object Lesson {
 
   implicit val lessonFormat = Json.format[Lesson]
+  implicit val formats = Serialization.formats(ShortTypeHints(List(classOf[LessonPartParagraph])))
 
   def addLesson(courseId: Long, name: String, description: String) = {
 
@@ -84,7 +90,26 @@ object Lesson {
 
     val parts =  new mutable.MutableList[LessonPart]()
 
-    parts += new LessonPartParagraph(1, 1,"This is the headline", "Do this lesson and you will be the master!!!")
+    DB.withConnection { implicit c =>
+
+      val selectLesson = SQL("select * from LessonPart where lesson_id = {id}").on(
+        'id -> id
+      )
+
+      selectLesson().foreach {row =>
+        val lesson_part_id = row[Long]("lesson_part_id")
+        val json = row[String]("json")
+
+        var lp: LessonPart  = read(json)
+
+        lp match {
+          case paragraph: LessonPartParagraph  => {
+            parts += LessonPartParagraph(lesson_part_id, paragraph.lesson_id,paragraph.headline, paragraph.text)
+          }
+          case _ =>
+        }
+      }
+    }
 
     parts
 
