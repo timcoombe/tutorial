@@ -18,18 +18,30 @@ $(function() {
 
     }
 
+    function deleteCourse(courseId){
+
+     $.ajax({
+         type: "DELETE",
+         url: "/admin/api/course/" + courseId,
+         success: function( data ) {
+
+            loadCourses();
+
+         }
+       });
+    }
+
+
 
     $('body').on('click', '.delete_course', function() {
 
-       $.ajax({
-             type: "DELETE",
-             url: "/admin/api/course/" + $(this).data("id"),
-             success: function( data ) {
+       var courseId = $(this).data("id");
 
-                loadCourses();
-
-             }
-           });
+       bootbox.confirm("Are you sure you want to delete this course?", function(result) {
+           if(result){
+                deleteCourse(courseId);
+           }
+       });
 
     });
 
