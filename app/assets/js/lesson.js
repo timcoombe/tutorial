@@ -2,11 +2,16 @@ $(function() {
 
     function addLessonParagraph(lessonPart){
 
-        var paragraphHTML = "<tr><td>";
+        var paragraphHTML = "<tr class='lesson-part-row'><td>";
 
         paragraphHTML = paragraphHTML +  "<table class='table lesson-part'>";
 
-        paragraphHTML = paragraphHTML + "<tr><td><a href='/admin/lessonpart/" + lessonPart.lesson_part_id + "'>edit</a></td></tr>";
+        paragraphHTML = paragraphHTML + "<tr><td>";
+        paragraphHTML = paragraphHTML +     "<a href='/admin/lessonpart/" + lessonPart.lesson_part_id + "'>edit</a>";
+        paragraphHTML = paragraphHTML +     "&nbsp;";
+        paragraphHTML = paragraphHTML +     "<a class='delete-lesson-part' data-id='" + lessonPart.lesson_part_id + "' href='#'>del</a>";
+        paragraphHTML = paragraphHTML + "</td></tr>";
+
         paragraphHTML = paragraphHTML + "<tr><td>" + lessonPart.headline + "</td></tr>";
         paragraphHTML = paragraphHTML +  "<tr><td>" + lessonPart.text + "</td></tr>";
 
@@ -35,6 +40,9 @@ $(function() {
     }
 
    function loadLessonParts() {
+
+        $(".lesson-part-row").remove();
+
         $.ajax({
            url: "/admin/api/lesson/" + lessonId + "/parts",
            success: function( data ) {
@@ -82,6 +90,23 @@ $(function() {
       });
 
       return false;
+
+    });
+
+
+    $('body').on('click', '.delete-lesson-part', function() {
+
+       $.ajax({
+             type: "DELETE",
+             url: "/admin/api/lessonpart/" + $(this).data("id"),
+             success: function( data ) {
+
+                loadLessonParts();
+
+             }
+           });
+
+        return false;
 
     });
 

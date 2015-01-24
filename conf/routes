@@ -13,8 +13,7 @@ GET     /admin/course/:id           controllers.CourseController.course(id: Long
 GET     /admin/lesson/:id           controllers.LessonController.lesson(id: Long)
 GET     /admin/lessonpart/:id       controllers.LessonPartController.lessonPart(id: Long)
 
-GET     /admin/lesson/:id/:part_type controllers.LessonPartController.newLessonPart(id: Long, part_type: String)
-
+GET    /admin/lesson/:id/new/:partType controllers.LessonPartController.newLessonPart(id: Long, partType: String)
 
 
 # Api controllers
@@ -35,7 +34,7 @@ PUT    /admin/api/lesson/:id                      controllers.LessonController.u
 
 GET    /admin/api/lesson/:id/parts                 controllers.LessonPartController.getLessonParts(id: Long)
 POST /admin/api/lesson/:id/paragraph                controllers.LessonPartController.addLessonParagraph(id: Long)
-
+DELETE /admin/api/lessonpart/:id                    controllers.LessonPartController.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

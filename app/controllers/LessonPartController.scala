@@ -45,6 +45,9 @@ object LessonPartController extends Controller{
 
   def newLessonPart(id: Long, partType: String) = Action {
 
+
+    println("partType: " + partType)
+
     partType match{
       case "paragraph" => Ok(views.html.adminlessonparagraph(id,0))
       case _ => NotFound
@@ -59,6 +62,13 @@ object LessonPartController extends Controller{
     LessonPartParagraph.addLessonPart(paragraph)
 
     Ok(views.html.adminlesson(lesson_id))
+  }
+
+  def delete(id: Long) = Action {
+
+    LessonPart.delete(id)
+
+    Ok
   }
 
 }
