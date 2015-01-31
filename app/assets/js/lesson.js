@@ -7,9 +7,9 @@ $(function() {
         paragraphHTML = paragraphHTML +  "<table class='table lesson-part'>";
 
         paragraphHTML = paragraphHTML + "<tr><td>";
-        paragraphHTML = paragraphHTML +     "<a href='/admin/lessonpart/" + lessonPart.lesson_part_id + "'>edit</a>";
+        paragraphHTML = paragraphHTML +     "<a href='/admin/lessonpart/" + lessonPart.lesson_part_id + "'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a>";
         paragraphHTML = paragraphHTML +     "&nbsp;";
-        paragraphHTML = paragraphHTML +     "<a class='delete-lesson-part' data-id='" + lessonPart.lesson_part_id + "' href='#'>del</a>";
+        paragraphHTML = paragraphHTML +     "<a class='delete-lesson-part' data-id='" + lessonPart.lesson_part_id + "' href='#'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
         paragraphHTML = paragraphHTML + "</td></tr>";
 
         paragraphHTML = paragraphHTML + "<tr><td>" + lessonPart.headline + "</td></tr>";
@@ -94,17 +94,28 @@ $(function() {
     });
 
 
+    function deleteLessonPart(lessonPartId){
+        $.ajax({
+                 type: "DELETE",
+                 url: "/admin/api/lessonpart/" + lessonPartId,
+                 success: function( data ) {
+
+                    loadLessonParts();
+
+                 }
+         });
+    }
+
+
     $('body').on('click', '.delete-lesson-part', function() {
 
-       $.ajax({
-             type: "DELETE",
-             url: "/admin/api/lessonpart/" + $(this).data("id"),
-             success: function( data ) {
+        var lessonPartId = $(this).data("id");
 
-                loadLessonParts();
-
-             }
-           });
+        bootbox.confirm("Are you sure you want to delete this lesson part?", function(result) {
+                 if(result){
+                      deleteLessonPart(lessonPartId);
+                 }
+        });
 
         return false;
 

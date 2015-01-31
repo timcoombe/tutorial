@@ -39,17 +39,28 @@ object LessonPartController extends Controller{
 
   def lessonPart(id: Long) = Action {
 
-    Ok(views.html.adminlesson(id))
+    LessonPart.getLessonPart(id) match {
+      case Some(part) => {
+        part match {
+          case s: LessonPartParagraph => {
+            val paragraph = part.asInstanceOf[LessonPartParagraph]
+            Ok(views.html.adminlessonparagraph(paragraph))
+          }
+          case _ => NotFound
+        }
+      }
+      case None => NotFound
+    }
 
   }
 
-  def newLessonPart(id: Long, partType: String) = Action {
+  def newLessonPart(lesson_id: Long, partType: String) = Action {
 
 
     println("partType: " + partType)
 
     partType match{
-      case "paragraph" => Ok(views.html.adminlessonparagraph(id,0))
+      case "paragraph" => Ok(views.html.adminlessonparagraph(new LessonPartParagraph(0,lesson_id,"","")))
       case _ => NotFound
     }
 

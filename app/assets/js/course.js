@@ -21,7 +21,7 @@ $(function() {
           url: "/admin/api/course/" + courseId + "/lessons",
           success: function( data ) {
             $.each(data, function(index,item) {
-                $("#lessons").append("<tr><td><a href='/admin/lesson/" + item.lesson_id + "'>" + item.name + "</a></td><td><a class='delete_lesson' data-id='" + item.lesson_id + "' href='#'>del</a></td></tr>");
+                $("#lessons").append("<tr><td><a href='/admin/lesson/" + item.lesson_id + "'>" + item.name + "</a></td><td><a class='delete_lesson' data-id='" + item.lesson_id + "' href='#'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td></tr>");
             });
           }
         });
@@ -52,20 +52,35 @@ $(function() {
 
     });
 
+    function deleteLesson(lessonId){
 
-      $('body').on('click', '.delete_lesson', function() {
+      $.ajax({
+         type: "DELETE",
+         url: "/admin/api/lesson/" + lessonId,
+         success: function( data ) {
+            loadCourse();
+         }
+       });
 
-           $.ajax({
-                 type: "DELETE",
-                 url: "/admin/api/lesson/" + $(this).data("id"),
-                 success: function( data ) {
+    }
 
-                    loadCourse();
 
-                 }
-               });
+  $('body').on('click', '.delete_lesson', function() {
 
-        });
+
+       var lessonId = $(this).data("id");
+
+       bootbox.confirm("Are you sure you want to delete this lesson?", function(result) {
+           if(result){
+                deleteLesson(lessonId);
+           }
+       });
+
+
+
+
+
+    });
 
     loadCourse();
 

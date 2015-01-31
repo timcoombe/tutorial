@@ -35,6 +35,8 @@ PUT    /admin/api/lesson/:id                      controllers.LessonController.u
 GET    /admin/api/lesson/:id/parts                 controllers.LessonPartController.getLessonParts(id: Long)
 POST /admin/api/lesson/:id/paragraph                controllers.LessonPartController.addLessonParagraph(id: Long)
 DELETE /admin/api/lessonpart/:id                    controllers.LessonPartController.delete(id: Long)
+GET /admin/api/lessonpart/:id                   controllers.LessonPartController.lessonPart(id:Long)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

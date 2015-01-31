@@ -9,7 +9,7 @@ $(function() {
           success: function( data ) {
 
             $.each(data, function(index,item) {
-                $("#courses").append("<tr><td><a href='/admin/course/" + item.course_id + "'>" + item.name + "</a></td><td><a class='delete_course' data-id='" + item.course_id + "' href='#'>del</a></td></tr>");
+                $("#courses").append("<tr><td><a href='/admin/course/" + item.course_id + "'>" + item.name + "</a></td><td><a class='delete_course' data-id='" + item.course_id + "' href='#'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td></tr>");
             });
 
 

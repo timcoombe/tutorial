@@ -5,16 +5,16 @@ $(function() {
 
       $(".alert").hide();
 
-      /*  $.ajax({
-          url: "/admin/api/lesson/" + lessonId,
+        $.ajax({
+          url: "/admin/api/lessonpart/" + partId,
           success: function( data ) {
 
-               $('#course_id').val(data.course_id);
                $('#lesson_id').val(data.lesson_id);
-               $('#name').val(data.name);
-               $('#description').val(data.description);
+               $('#part_id').val(data.lesson_part_id);
+               $('#headline').val(data.headline);
+               $('#text').val(data.text);
            }
-        });*/
+        });
 
     }
 
