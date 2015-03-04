@@ -14,6 +14,7 @@ import org.json4s.native.JsonMethods._
 import org.json4s.JsonDSL._
 import org.json4s.native.Serialization
 import org.json4s.native.Serialization.{read, write}
+import util.BreadCrumb
 
 object LessonPartController extends Controller{
 
@@ -39,17 +40,36 @@ object LessonPartController extends Controller{
 
   def lessonPart(id: Long) = Action {
 
-    LessonPart.getLessonPart(id) match {
+    val lessonPart = LessonPart.getLessonPart(id)
+
+    lessonPart match {
       case Some(part) => {
         part match {
           case s: LessonPartParagraph => {
             val paragraph = part.asInstanceOf[LessonPartParagraph]
-            Ok(views.html.adminlessonparagraph(paragraph))
+            Ok(views.html.adminlessonparagraph(paragraph)(getLessonPartBreadCrumb(part)))
           }
           case _ => NotFound
         }
       }
       case None => NotFound
+    }
+
+  }
+
+  def getLessonPartBreadCrumb(lessonPart:LessonPart) : BreadCrumb = {
+
+    lessonPart match {
+      case para: LessonPartParagraph => {
+          val breadCrumb = new BreadCrumb()
+          breadCrumb.addLink("Courses","/admin")
+          val lesson: Lesson = Lesson.getLesson(para.lesson_id)
+          breadCrumb.addLink(Course.getCourse(lesson.course_id).name,s"/admin/course/${lesson.course_id}")
+          breadCrumb.addLink(lesson.name,s"/admin/lesson/${lesson.lesson_id}")
+          breadCrumb
+      }
+      case _ => new BreadCrumb
+
     }
 
   }
@@ -60,7 +80,10 @@ object LessonPartController extends Controller{
     println("partType: " + partType)
 
     partType match{
-      case "paragraph" => Ok(views.html.adminlessonparagraph(new LessonPartParagraph(0,lesson_id,"","")))
+      case "paragraph" => {
+        val breadCrumb = new BreadCrumb()
+        Ok(views.html.adminlessonparagraph(new LessonPartParagraph(0, lesson_id, "", ""))(breadCrumb))
+      }
       case _ => NotFound
     }
 
@@ -72,7 +95,9 @@ object LessonPartController extends Controller{
 
     LessonPartParagraph.addLessonPart(paragraph)
 
-    Ok(views.html.adminlesson(lesson_id))
+    val breadCrumb = new BreadCrumb()
+    Ok(views.html.adminlesson(lesson_id)(breadCrumb))
+
   }
 
   def delete(id: Long) = Action {

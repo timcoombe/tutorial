@@ -1,9 +1,16 @@
-@(paragraph: LessonPartParagraph)
+@import util._
+@(paragraph: LessonPartParagraph)(breadCrumb: BreadCrumb)
 
-@admin("Paragraph!!") {
+
+@admin("Paragraph!!")(breadCrumb) {
 
         <script src='@routes.Assets.at("js/paragraph.js")' type='text/javascript'></script>
 
+        <ol class="breadcrumb">
+            @for(item <- breadCrumb.breadCrumbs) {
+            <li><a href="@item.link">@item.text</a></li>
+            }
+        </ol>
 
         <div class="alert alert-success" role="alert">Test</div>
 

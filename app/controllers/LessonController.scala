@@ -14,6 +14,7 @@ import org.json4s.native.JsonMethods._
 import org.json4s.JsonDSL._
 import org.json4s.native.Serialization
 import org.json4s.native.Serialization.{read, write}
+import util.BreadCrumb
 
 object LessonController extends Controller{
 
@@ -54,7 +55,15 @@ object LessonController extends Controller{
 
   def lesson(id: Long) = Action {
 
-    Ok(views.html.adminlesson(id))
+    val breadCrumb = new BreadCrumb()
+    breadCrumb.addLink("Courses","/admin")
+
+    val lesson: Lesson = Lesson.getLesson(id)
+    Course.getCourse(Lesson.getLesson(id).course_id).name
+
+    breadCrumb.addLink(Course.getCourse(lesson.course_id).name,s"/admin/course/${lesson.course_id}")
+
+    Ok(views.html.adminlesson(id)(breadCrumb))
 
   }
 

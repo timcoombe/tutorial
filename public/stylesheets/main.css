@@ -1,3 +1,16 @@
+
+.admin-title {
+    text-decoration: none;
+    color: #000;
+
+}
+
+.admin-title:hover {
+    text-decoration: none;
+    color: #000;
+
+}
+
 .lesson-part {
     border-style: dashed;
     border-width: 1px;

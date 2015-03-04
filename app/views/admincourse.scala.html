@@ -1,12 +1,22 @@
-@(id: Long)
+@import util._
+@(id: Long)(breadCrumb: BreadCrumb)
 
-@admin("Course!!") {
+
+
+@admin("Course!!")(breadCrumb) {
 
         <script type='text/javascript'>
             var courseId = @id
         </script>
 
         <script src='@routes.Assets.at("js/course.js")' type='text/javascript'></script>
+
+
+        <ol class="breadcrumb">
+             @for(item <- breadCrumb.breadCrumbs) {
+                <li><a href="@item.link">@item.text</a></li>
+            }
+        </ol>
 
 
         <table id="course"></table>

@@ -1,4 +1,6 @@
-@(title: String)(content: Html)
+@import util._
+@(title: String)(breadCrumb: BreadCrumb)(content: Html)
+
 
 <!DOCTYPE html>
 
@@ -21,9 +23,10 @@
     <body>
         <div class="container">
             <div class="page-header">
-                <h1>Tutorial Admin</h1>
+                <a class="admin-title" href="/admin"><h1>Tutorial Admin</h1></a>
                 <p class="lead">Build tutorials here</p>
             </div>
+
         @content
         </div>
     </body>

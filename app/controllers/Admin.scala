@@ -10,13 +10,15 @@ import play.api.libs.json.Json
 import play.api.mvc._
 import anorm._
 import play.api.Play.current
+import util.BreadCrumb
 
 
 object Admin extends Controller{
 
 
   def index = Action {
-    Ok(views.html.admincourses("Your new application is ready."))
+
+    Ok(views.html.admincourses("Your new application is ready.")(new BreadCrumb()))
   }
 
 }

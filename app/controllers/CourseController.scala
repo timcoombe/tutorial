@@ -5,6 +5,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
 import play.api.mvc._
+import util.BreadCrumb
 
 object CourseController extends Controller{
 
@@ -57,7 +58,11 @@ object CourseController extends Controller{
 
   def course(id: Long) = Action {
 
-    Ok(views.html.admincourse(id))
+    val breadCrumb = new BreadCrumb()
+
+    breadCrumb.addLink("Courses","/admin")
+
+    Ok(views.html.admincourse(id)(breadCrumb))
 
   }
 
